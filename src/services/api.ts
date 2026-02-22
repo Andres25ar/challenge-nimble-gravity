@@ -26,21 +26,21 @@ export interface ApplicationPayload {
 const BASE_URL = 'https://botfilter-h5ddh6dye8exb7ha.centralus-01.azurewebsites.net';
 
 export const api = {
-    //obtener datos como promesa para la interfaz de candidatos (pasamos un email)
+    //obtener datos como promesa para la interfaz de candidatos (pasamos un email) [STEP 2]
     getCandidate: async (email: string): Promise<Candidate> => {
         const response = await fetch(`${BASE_URL}/api/candidate/get-by-email?email=${email}`);
         if (!response.ok) throw new Error('Candidato no encontrado');
         return await response.json();
     },
 
-    //GET para la lista de puestos disponibles
+    //GET para la lista de puestos disponibles [STEP 3 y 4]
     getJobs: async (): Promise<Job[]> => {
         const response = await fetch(`${BASE_URL}/api/jobs/get-list`);
         if (!response.ok) throw new Error('Error al obtener los puestos');
         return await response.json();
     },
 
-    //submit (se espera que la interfaz para la aplicacion sea lo que se envia)
+    //submit (se espera que la interfaz para la aplicacion sea lo que se envia) [STEP 5]
     applyToJob: async (data: ApplicationPayload): Promise<{ ok: boolean }> => {
         const response = await fetch(`${BASE_URL}/api/candidate/apply-to-job`, {
             method: 'POST',

@@ -54,10 +54,10 @@ export default function Login({ onLoginSuccess }: LoginProps) {
                 <button
                     type="submit"
                     disabled={loading || !email}
-                    className="bg-blue-600 text-white p-3 rounded hover:bg-blue-700 disabled:bg-blue-300 flex justify-center items-center transition-colors"
+                    className="bg-blue-600 text-white p-3 rounded hover:bg-blue-700 disabled:bg-blue-300 flex justify-center items-center transition-colors cursor-pointer disabled:cursor-not-allowed"
                 >
                     {loading ? (
-                        /* Spinner de carga de Tailwind */
+                        /*spinner de carga de, no se si funciona xd*/
                         <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
                     ) : (
                         'Continuar'
@@ -65,7 +65,6 @@ export default function Login({ onLoginSuccess }: LoginProps) {
                 </button>
             </form>
 
-            {/* Mensajes de feedback */}
             {error && <p className="text-red-500 mt-4 text-center font-medium">{error}</p>}
             {successMessage && <p className="text-green-600 mt-4 text-center font-bold">{successMessage}</p>}
         </div>
