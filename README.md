@@ -39,6 +39,7 @@ src/
 │   └── api.ts          # Centralización de endpoints usando Fetch API y tipado TS
 ├── App.tsx             # Componente raíz y orquestador de estados globales
 └── main.tsx            # Punto de entrada de la aplicación
+```
 
 ##Instalación y Uso Local
 
@@ -47,18 +48,22 @@ Sigue estos pasos para correr el proyecto en tu entorno local:
 1. **Clonar el repositorio:**
 ```bash
 git clone https://github.com/Andres25ar/Challenge_Nimble_Gravity
+```
 
 2. **Navegar al directorio:**
 ```bash
 cd Challenge_Nimble_Gravity
+```
 
 3. **Instalar dependencias:**
 ```bash
 npm install
+```
 
 4. **Levantar el servidor de desarrollo:**
 ```bash
 npm run dev
+```
 
 **La aplicación estará disponible en http://localhost:5173**
 
