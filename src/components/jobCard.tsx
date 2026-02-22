@@ -12,6 +12,7 @@ export default function JobCard({ job, candidate, isActive, onToggle }: JobCardP
     const [repoUrl, setRepoUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const [feedback, setFeedback] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+    //funcion que se encarga de enviar la informacion a travez del endpoint
     const handleSubmit = async () => {
         if (!repoUrl.trim()) return;
         const confirm = window.confirm(`¿Estás seguro que quieres aplicar a la posición de ${job.title}?`);
@@ -19,18 +20,20 @@ export default function JobCard({ job, candidate, isActive, onToggle }: JobCardP
         setLoading(true);
         setFeedback(null);
         try {
+            //intenta enviar los datos en un JSON con la funcion applyToJob
             await api.applyToJob({
                 uuid: candidate.uuid,
                 candidateId: candidate.candidateId,
                 jobId: job.id,
                 repoUrl: repoUrl
             });
-
+            //mensaje de exito
             setFeedback({ type: 'success', text: '¡Postulación enviada con éxito!' });
             onToggle();
             setRepoUrl('');
         } catch (err) {
-            setFeedback({ type: 'error', text: 'Error al enviar postulación. Revisa la consola.' });
+            //mensaje de error
+            setFeedback({ type: 'error', text: 'Algo salió mal... Error al enviar postulación.' });
         } finally {
             setLoading(false);
         }

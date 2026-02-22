@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# Nimble Gravity - Junior Fullstack Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es la resolución de un technical challenge para la posición de Junior Fullstack Developer en Nimble Gravity. Se trata de una SPA (Single Page Application) que interactúa con la API de la empresa para validar la identidad del candidato, obtener posiciones laborales abiertas y procesar la postulación.
 
-Currently, two official plugins are available:
+## ✨ Características Principales (Features)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Además de cumplir con los requisitos básicos solicitados, se implementaron mejoras enfocadas en la Experiencia de Usuario y la calidad del código:
 
-## React Compiler
+* **Flujo de Autenticación Simulado:** Validación del email del candidato mediante un endpoint `GET`, manejando estados de carga y errores de red.
+* **Listado Dinámico y Filtrado:** * Búsqueda en tiempo real de puestos disponibles (búsqueda por coincidencia de texto).
+    * Ordenamiento alfabético (A-Z y Z-A) para facilitar la navegación.
+    * Botón dinámico para limpiar la búsqueda rápidamente.
+* **Gestión de Formularios "Inline":** Al aplicar a un puesto, el formulario se despliega dentro de la misma tarjeta. Se implementó el patrón de "estado elevado" (Lifting State Up) para asegurar que solo una tarjeta de postulación esté abierta a la vez.
+* **Validaciones y Feedback de UI:** * Alertas de confirmación antes de enviar llamadas `POST` destructivas/finales.
+    * Manejo de estados deshabilitados (`disabled`) en botones mientras se esperan respuestas de la API o si los inputs están vacíos.
+    * Spinners de carga nativos implementados con CSS.
+* **Diseño 100% Responsivo:** Interfaz adaptada "Mobile-First", garantizando una lectura y uso cómodo tanto en dispositivos móviles como en PC.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Stack Tecnológico
 
-## Expanding the ESLint configuration
+El proyecto fue construido utilizando herramientas modernas para garantizar velocidad, tipado estricto y estilos mantenibles:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Core:** [React 18](https://react.dev/)
+* **Lenguaje:** [TypeScript](https://www.typescriptlang.org/) (Tipado estricto de interfaces para las respuestas de la API).
+* **Build Tool:** [Vite](https://vitejs.dev/) (Tiempos de carga y HMR ultrarrápidos).
+* **Estilos:** [Tailwind CSS v4](https://tailwindcss.com/) (Plugin nativo para Vite, sin archivos de configuración externos).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🏗️ Arquitectura y Estructura del Proyecto
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Se optó por una arquitectura modular, separando la lógica de negocio (llamadas a la API) de la interfaz de usuario:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+```text
+src/
+├── components/
+│   ├── Login.tsx       # Componente de ingreso y validación inicial
+│   ├── JobList.tsx     # Contenedor de la lista, lógica de búsqueda y ordenamiento
+│   └── JobCard.tsx     # Tarjeta individual con la lógica del POST para aplicar
+├── services/
+│   └── api.ts          # Centralización de endpoints usando Fetch API y tipado TS
+├── App.tsx             # Componente raíz y orquestador de estados globales
+└── main.tsx            # Punto de entrada de la aplicación
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+##Instalación y Uso Local
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Sigue estos pasos para correr el proyecto en tu entorno local:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. **Clonar el repositorio:**
+```bash
+git clone https://github.com/Andres25ar/Challenge_Nimble_Gravity
+
+2. **Navegar al directorio:**
+```bash
+cd Challenge_Nimble_Gravity
+
+3. **Instalar dependencias:**
+```bash
+npm install
+
+4. **Levantar el servidor de desarrollo:**
+```bash
+npm run dev
+
+**La aplicación estará disponible en http://localhost:5173**
+
+Desarrollado por Andres para Nimble Gravity - 2026
