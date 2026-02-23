@@ -31,7 +31,11 @@ export default function Login({ onLoginSuccess }: LoginProps) {
 
         } catch (err) {
             //mensaje de error si no se encuentra el email
-            setError('El email ingresado no es válido o no está registrado.');
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('Ocurrió un error inesperado al verificar tu email.');
+            }
         } finally {
             setLoading(false);
         }

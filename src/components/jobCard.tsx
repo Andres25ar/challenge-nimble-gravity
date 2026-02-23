@@ -25,6 +25,7 @@ export default function JobCard({ job, candidate, isActive, onToggle }: JobCardP
                 uuid: candidate.uuid,
                 candidateId: candidate.candidateId,
                 jobId: job.id,
+                applicationId: candidate.applicationId,
                 repoUrl: repoUrl
             });
             //mensaje de exito
@@ -32,8 +33,12 @@ export default function JobCard({ job, candidate, isActive, onToggle }: JobCardP
             onToggle();
             setRepoUrl('');
         } catch (err) {
-            //mensaje de error
-            setFeedback({ type: 'error', text: 'Algo salió mal... Error al enviar postulación.' });
+            //si el error viene de la API, mostrar mensaje
+            if (err instanceof Error) {
+                setFeedback({ type: 'error', text: err.message });
+            } else {
+                setFeedback({ type: 'error', text: 'Algo salió mal... Error al enviar postulación.' });
+            }
         } finally {
             setLoading(false);
         }
